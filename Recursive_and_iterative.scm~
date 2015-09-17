@@ -1,0 +1,20 @@
+#lang racket
+
+
+(define (f n)
+  (cond ((< n 3) n)
+        (else (+ ((f (- n 1)) (* 2 (f (- n 2))) (* 3 (f (- n 3))))))))
+
+(define (f-iter n)
+  (define (f-iter-my n curr f-n-1 f-n-2 f-n-3)
+    (define f-n (+ f-n-1 (* 2 f-n-2) (* 3 f-n-3)))
+    (if (= curr n)
+      f-n
+      (f-iter-my n (+ curr 1) f-n f-n-1 f-n-2)))
+  (if (< n 3)
+      n
+      (f-iter-my n 3 2 1 0)))
+      
+
+
+

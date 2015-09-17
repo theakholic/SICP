@@ -1,0 +1,28 @@
+#lang racket
+(define (sum a b term next); sum of f(x) where x varies from a to b
+  (if (> a b)
+      0
+      (+ (term a) (sum (next a) b term next))))
+
+(define (sum-iter a b term next)
+  (define (my-sum x y curr)
+    (cond ((> x y) curr)
+          (else  (my-sum (next x) y (+ curr (term x))))))
+  (my-sum a b 0))
+
+(define (my-next x)
+  (+ x 1))
+
+(define (cube x)
+  (* x x x))
+
+
+(define (pi-sum a b) ; add 1/a(a+2) + 1/(a+4)(a+6)... which converges to PI/8
+  (define (pi-term x)
+    (/ 1.0 (* x (+ x 2))))
+  (define (pi-next x)
+    (+ x 4))
+  (sum-iter a b pi-term pi-next))
+
+
+(defin
